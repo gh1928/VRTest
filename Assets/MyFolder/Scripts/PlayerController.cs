@@ -6,13 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
     private Vector3 dir;
-
+    private Camera cam;
 
     [SerializeField]
     private float speed = 1f;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -26,5 +27,7 @@ public class PlayerController : MonoBehaviour
         dir.y = rb.velocity.y;
 
         rb.velocity = dir;
+
+        transform.localEulerAngles = cam.transform.localEulerAngles;
     }
 }
