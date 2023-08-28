@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-    private Vector3 dir;
-    private Camera cam;
+    private Camera cam;    
 
     [SerializeField]
     private float speed = 1f;
@@ -17,17 +16,14 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
+    private Vector2 direction;
     void Update()
     {
-        dir.x = Input.GetAxisRaw("Horizontal");
-        dir.z = Input.GetAxisRaw("Vertical");
-        dir.y = 0;
-        dir = dir.normalized * speed;
-
-        dir.y = rb.velocity.y;
-
-        rb.velocity = dir;
+        Vector3 newVelocity = (transform.right * Input.GetAxisRaw("Horizontal") + transform.forward * Input.GetAxisRaw("Vertical")).normalized * speed;
+        newVelocity.y = rb.velocity.y;
+        rb.velocity = newVelocity;
+        rb.angularVelocity = Vector3.zero;
         
-        transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
+        transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y,0);
     }
 }
