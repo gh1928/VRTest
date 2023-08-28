@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         dir.y = rb.velocity.y;
 
         rb.velocity = dir;
-
-        transform.localEulerAngles = cam.transform.localEulerAngles;
+        
+        transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
     }
 }
